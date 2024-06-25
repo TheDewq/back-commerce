@@ -874,9 +874,10 @@ export interface ApiClothesFeatureClothesFeature extends Schema.CollectionType {
     singularName: 'clothes-feature';
     pluralName: 'clothes-features';
     displayName: 'clothes-feature';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     clothe: Attribute.Relation<
@@ -888,7 +889,6 @@ export interface ApiClothesFeatureClothesFeature extends Schema.CollectionType {
     content: Attribute.Text & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::clothes-feature.clothes-feature',
       'oneToOne',
@@ -956,7 +956,6 @@ export interface ApiPrendaPrenda extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
-    type: Attribute.String & Attribute.Required;
     suplier: Attribute.Relation<
       'api::prenda.prenda',
       'oneToOne',
@@ -966,6 +965,11 @@ export interface ApiPrendaPrenda extends Schema.CollectionType {
     price: Attribute.String & Attribute.Required;
     cost: Attribute.String & Attribute.Required;
     discount: Attribute.Integer;
+    category: Attribute.Relation<
+      'api::prenda.prenda',
+      'oneToOne',
+      'api::category.category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

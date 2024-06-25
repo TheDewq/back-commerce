@@ -4,10 +4,11 @@
   "info": {
     "singularName": "clothes-feature",
     "pluralName": "clothes-features",
-    "displayName": "clothes-feature"
+    "displayName": "clothes-feature",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
