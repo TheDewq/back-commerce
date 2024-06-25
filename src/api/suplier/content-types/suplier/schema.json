@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "supliers",
+  "info": {
+    "singularName": "suplier",
+    "pluralName": "supliers",
+    "displayName": "suplier"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "direction": {
+      "type": "text"
+    },
+    "website": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string",
+      "maxLength": 10
+    }
+  }
+}

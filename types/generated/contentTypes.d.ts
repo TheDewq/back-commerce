@@ -787,6 +787,278 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAddressAddress extends Schema.CollectionType {
+  collectionName: 'addresses';
+  info: {
+    singularName: 'address';
+    pluralName: 'addresses';
+    displayName: 'address';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    dir: Attribute.String & Attribute.Required;
+    city: Attribute.String & Attribute.Required;
+    department: Attribute.String & Attribute.Required;
+    phone1: Attribute.String &
+      Attribute.Required &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    phone2: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    zipcode: Attribute.String & Attribute.Required;
+    Details: Attribute.String;
+    user: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::address.address',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    slug: Attribute.UID<'api::category.category', 'title'>;
+    icon: Attribute.Media<'images'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiClothesFeatureClothesFeature extends Schema.CollectionType {
+  collectionName: 'clothes_features';
+  info: {
+    singularName: 'clothes-feature';
+    pluralName: 'clothes-features';
+    displayName: 'clothes-feature';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clothe: Attribute.Relation<
+      'api::clothes-feature.clothes-feature',
+      'oneToOne',
+      'api::prenda.prenda'
+    >;
+    type: Attribute.String & Attribute.Required;
+    content: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::clothes-feature.clothes-feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::clothes-feature.clothes-feature',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiColorSizeAvaliableColorSizeAvaliable
+  extends Schema.CollectionType {
+  collectionName: 'color_size_avaliables';
+  info: {
+    singularName: 'color-size-avaliable';
+    pluralName: 'color-size-avaliables';
+    displayName: 'color-size-quantity';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    clothe: Attribute.Relation<
+      'api::color-size-avaliable.color-size-avaliable',
+      'oneToOne',
+      'api::prenda.prenda'
+    >;
+    quantity: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
+    size: Attribute.String;
+    color: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::color-size-avaliable.color-size-avaliable',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::color-size-avaliable.color-size-avaliable',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPrendaPrenda extends Schema.CollectionType {
+  collectionName: 'prendas';
+  info: {
+    singularName: 'prenda';
+    pluralName: 'prendas';
+    displayName: 'clothes';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    type: Attribute.String & Attribute.Required;
+    suplier: Attribute.Relation<
+      'api::prenda.prenda',
+      'oneToOne',
+      'api::suplier.suplier'
+    >;
+    images: Attribute.Media<'images', true> & Attribute.Required;
+    price: Attribute.String & Attribute.Required;
+    cost: Attribute.String & Attribute.Required;
+    discount: Attribute.Integer;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::prenda.prenda',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::prenda.prenda',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSuplierSuplier extends Schema.CollectionType {
+  collectionName: 'supliers';
+  info: {
+    singularName: 'suplier';
+    pluralName: 'supliers';
+    displayName: 'suplier';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    direction: Attribute.Text;
+    website: Attribute.String;
+    phone: Attribute.String &
+      Attribute.SetMinMaxLength<{
+        maxLength: 10;
+      }>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::suplier.suplier',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::suplier.suplier',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWishlistWishlist extends Schema.CollectionType {
+  collectionName: 'wishlists';
+  info: {
+    singularName: 'wishlist';
+    pluralName: 'wishlists';
+    displayName: 'wishlist';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    clothe: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'api::prenda.prenda'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::wishlist.wishlist',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -805,6 +1077,13 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::address.address': ApiAddressAddress;
+      'api::category.category': ApiCategoryCategory;
+      'api::clothes-feature.clothes-feature': ApiClothesFeatureClothesFeature;
+      'api::color-size-avaliable.color-size-avaliable': ApiColorSizeAvaliableColorSizeAvaliable;
+      'api::prenda.prenda': ApiPrendaPrenda;
+      'api::suplier.suplier': ApiSuplierSuplier;
+      'api::wishlist.wishlist': ApiWishlistWishlist;
     }
   }
 }

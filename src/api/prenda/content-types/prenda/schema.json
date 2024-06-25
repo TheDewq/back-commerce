@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "prendas",
+  "info": {
+    "singularName": "prenda",
+    "pluralName": "prendas",
+    "displayName": "clothes",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "suplier": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::suplier.suplier"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "price": {
+      "type": "string",
+      "required": true
+    },
+    "cost": {
+      "type": "string",
+      "required": true
+    },
+    "discount": {
+      "type": "integer"
+    }
+  }
+}

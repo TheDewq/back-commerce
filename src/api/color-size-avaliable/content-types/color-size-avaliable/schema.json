@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "color_size_avaliables",
+  "info": {
+    "singularName": "color-size-avaliable",
+    "pluralName": "color-size-avaliables",
+    "displayName": "color-size-quantity",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "clothe": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prenda.prenda"
+    },
+    "quantity": {
+      "type": "integer",
+      "required": true,
+      "default": 0
+    },
+    "size": {
+      "type": "string"
+    },
+    "color": {
+      "type": "string"
+    }
+  }
+}

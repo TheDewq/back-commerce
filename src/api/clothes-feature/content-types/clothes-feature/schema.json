@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "clothes_features",
+  "info": {
+    "singularName": "clothes-feature",
+    "pluralName": "clothes-features",
+    "displayName": "clothes-feature"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "clothe": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::prenda.prenda"
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    },
+    "content": {
+      "type": "text",
+      "required": true
+    }
+  }
+}
