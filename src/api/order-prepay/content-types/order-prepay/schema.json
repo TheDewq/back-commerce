@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_prepays",
+  "info": {
+    "singularName": "order-prepay",
+    "pluralName": "order-prepays",
+    "displayName": "Order_PREPAY",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "inversedBy": "order_prepay"
+    },
+    "id_payment": {
+      "type": "string",
+      "required": true
+    },
+    "status": {
+      "type": "string",
+      "required": false
+    }
+  }
+}

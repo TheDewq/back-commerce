@@ -914,7 +914,7 @@ export interface ApiColorSizeAvaliableColorSizeAvaliable
     description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     clothe: Attribute.Relation<
@@ -927,7 +927,6 @@ export interface ApiColorSizeAvaliableColorSizeAvaliable
     color: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::color-size-avaliable.color-size-avaliable',
       'oneToOne',
@@ -936,6 +935,128 @@ export interface ApiColorSizeAvaliableColorSizeAvaliable
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::color-size-avaliable.color-size-avaliable',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderOrder extends Schema.CollectionType {
+  collectionName: 'orders';
+  info: {
+    singularName: 'order';
+    pluralName: 'orders';
+    displayName: 'order';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    user: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    total_payment: Attribute.Decimal & Attribute.Required;
+    shiping_address: Attribute.JSON & Attribute.Required;
+    products: Attribute.JSON & Attribute.Required;
+    status: Attribute.String & Attribute.DefaultTo<'inconcluso'>;
+    order_cod: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'api::order-cod.order-cod'
+    >;
+    order_prepay: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'api::order-prepay.order-prepay'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order.order',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderCodOrderCod extends Schema.CollectionType {
+  collectionName: 'order_cods';
+  info: {
+    singularName: 'order-cod';
+    pluralName: 'order-cods';
+    displayName: 'order_COD';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    order: Attribute.Relation<
+      'api::order-cod.order-cod',
+      'oneToOne',
+      'api::order.order'
+    >;
+    confirmed: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    shipping_price: Attribute.Decimal & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order-cod.order-cod',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order-cod.order-cod',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrderPrepayOrderPrepay extends Schema.CollectionType {
+  collectionName: 'order_prepays';
+  info: {
+    singularName: 'order-prepay';
+    pluralName: 'order-prepays';
+    displayName: 'Order_PREPAY';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    order: Attribute.Relation<
+      'api::order-prepay.order-prepay',
+      'oneToOne',
+      'api::order.order'
+    >;
+    id_payment: Attribute.String & Attribute.Required;
+    status: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::order-prepay.order-prepay',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::order-prepay.order-prepay',
       'oneToOne',
       'admin::user'
     > &
@@ -994,9 +1115,10 @@ export interface ApiSuplierSuplier extends Schema.CollectionType {
     singularName: 'suplier';
     pluralName: 'supliers';
     displayName: 'suplier';
+    description: '';
   };
   options: {
-    draftAndPublish: true;
+    draftAndPublish: false;
   };
   attributes: {
     name: Attribute.String & Attribute.Required;
@@ -1008,7 +1130,6 @@ export interface ApiSuplierSuplier extends Schema.CollectionType {
       }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
       'api::suplier.suplier',
       'oneToOne',
@@ -1085,6 +1206,9 @@ declare module '@strapi/types' {
       'api::category.category': ApiCategoryCategory;
       'api::clothes-feature.clothes-feature': ApiClothesFeatureClothesFeature;
       'api::color-size-avaliable.color-size-avaliable': ApiColorSizeAvaliableColorSizeAvaliable;
+      'api::order.order': ApiOrderOrder;
+      'api::order-cod.order-cod': ApiOrderCodOrderCod;
+      'api::order-prepay.order-prepay': ApiOrderPrepayOrderPrepay;
       'api::prenda.prenda': ApiPrendaPrenda;
       'api::suplier.suplier': ApiSuplierSuplier;
       'api::wishlist.wishlist': ApiWishlistWishlist;

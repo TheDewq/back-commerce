@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "order_cods",
+  "info": {
+    "singularName": "order-cod",
+    "pluralName": "order-cods",
+    "displayName": "order_COD",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "order": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order.order",
+      "inversedBy": "order_cod"
+    },
+    "confirmed": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "shipping_price": {
+      "type": "decimal",
+      "required": true
+    }
+  }
+}
