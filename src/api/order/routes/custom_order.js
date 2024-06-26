@@ -1,5 +1,9 @@
 module.exports = {
-    method: "POST",
-    path: "/payment-order",
-    handler: "order.paymentOrder"
+    routes: [
+        {
+            method: "POST",
+            path: "/new-order",
+            handler: "order.newOrder"
+        }
+    ]
 }
