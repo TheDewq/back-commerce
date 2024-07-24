@@ -4,10 +4,11 @@
   "info": {
     "singularName": "address",
     "pluralName": "addresses",
-    "displayName": "address"
+    "displayName": "address",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {

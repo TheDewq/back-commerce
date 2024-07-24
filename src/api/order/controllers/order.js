@@ -29,5 +29,5 @@ function cod_order(ctx){
 }
 
 function prepay_order(ctx){
-    ctx.body = "listones";
+    ctx.body = "gi";
 }
