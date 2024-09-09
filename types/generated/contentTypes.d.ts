@@ -872,6 +872,7 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -879,7 +880,6 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     slug: Attribute.UID<'api::category.category', 'title'>;
-    icon: Attribute.Media<'images'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1139,6 +1139,41 @@ export interface ApiPrendaPrenda extends Schema.CollectionType {
   };
 }
 
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'product';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    price: Attribute.Decimal & Attribute.Required;
+    discount: Attribute.Decimal & Attribute.Required;
+    photos: Attribute.Media<'images' | 'files' | 'videos' | 'audios', true> &
+      Attribute.Required;
+    details: Attribute.Text & Attribute.Required;
+    barcode: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSuplierSuplier extends Schema.CollectionType {
   collectionName: 'supliers';
   info: {
@@ -1241,6 +1276,7 @@ declare module '@strapi/types' {
       'api::order-cod.order-cod': ApiOrderCodOrderCod;
       'api::order-prepay.order-prepay': ApiOrderPrepayOrderPrepay;
       'api::prenda.prenda': ApiPrendaPrenda;
+      'api::product.product': ApiProductProduct;
       'api::suplier.suplier': ApiSuplierSuplier;
       'api::wishlist.wishlist': ApiWishlistWishlist;
     }
